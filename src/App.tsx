@@ -1,15 +1,22 @@
 import React from 'react';
 import './App.css';
-import {Navigate, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
 import {PokemonList} from "./pages/pokemon-list";
+import InjectAxiosInterceptors from "./config/InjectAxiosInterceptor";
+import {QueryClient, QueryClientProvider} from 'react-query';
 
 function App() {
 
   return (
-    <Routes>
-      <Route path={'/'} element={<PokemonList />} />
-      <Route path={'*'} element={<Navigate to="/" />} />
-    </Routes>
+    <QueryClientProvider client={new QueryClient()}>
+      <BrowserRouter>
+        <InjectAxiosInterceptors/>
+        <Routes>
+          <Route path={'/'} element={<PokemonList/>}/>
+          <Route path={'*'} element={<Navigate to="/"/>}/>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

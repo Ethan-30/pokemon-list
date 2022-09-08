@@ -1,7 +1,9 @@
 import {cleanup, render, screen} from '@testing-library/react';
 import {QueryClient, QueryClientProvider} from 'react-query';
 import {PokemonList} from "../index";
-
+import * as usePokemonList from "../../../hook/usePokemonList"
+import {API_URL} from "../../../config";
+import * as usePokemonInfo from "../../../hook/usePokemonInfo";
 
 describe('Test action api', () => {
 	afterEach(() => {
@@ -14,43 +16,24 @@ describe('Test action api', () => {
 	});
 
 	test('snapshot test', () => {
-		// jest.spyOn(useInfinity, 'useInfiniteList').mockReturnValue({
-		// 	data: {
-		// 		pages: [
-		// 			{
-		// 				results: [
-		// 					{
-		// 						name: 'bulbasasur',
-		// 						url: `${process.env.POKE_BASE_URL}/pokemon/1/`,
-		// 					},
-		// 				],
-		// 			},
-		// 		],
-		// 		pageParams: [],
-		// 	},
-		// 	isLoading: false,
-		// 	hasNextPage: false,
-		// 	fetchNextPage: jest.fn(),
-		// });
-		// jest.spyOn(useQuery, 'useQueryGetPokeType').mockReturnValue({
-		// 	isLoading: false,
-		// 	data: {
-		// 		results: [
-		// 			{
-		// 				name: 'normal',
-		// 				url: `${process.env.POKE_BASE_URL}/type/1/`,
-		// 			},
-		// 		],
-		// 	},
-		// 	error: undefined,
-		// });
+		jest.spyOn(usePokemonList, 'usePokemonList').mockReturnValue({
+			totalPokemonList: 1000,
+			results: [{
+				name: 'bulbasasur',
+				url: `${API_URL.apiList}/1/`,
+			}],
+		});
+		jest.spyOn(usePokemonInfo, 'usePokemonInfo').mockReturnValue({
+			pokemonId : '1',
+			backgroundCard: 'red'
+		});
 		const { asFragment } = render(
 			<QueryClientProvider client={new QueryClient()}>
 				<PokemonList />
 			</QueryClientProvider>
 		);
-
-		expect(asFragment()).toMatchSnapshot();
+		// expect(asFragment()).toMatchSnapshot();
+		expect(screen.queryByTestId('pokemon-bulbasasur')).not.toBeNull();
 	});
 });
 

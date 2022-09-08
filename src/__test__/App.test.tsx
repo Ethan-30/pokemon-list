@@ -18,9 +18,7 @@ describe('Test action api', () => {
 const setUp = () => {
 	render(
 		<QueryClientProvider client={new QueryClient()}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
+			<App />
 		</QueryClientProvider>
 	);
 };

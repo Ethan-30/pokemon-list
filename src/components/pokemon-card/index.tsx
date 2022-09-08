@@ -7,33 +7,17 @@ import {get} from 'lodash';
 import mix from 'mix-css-color'
 import {IPokemonInfo} from "../../entity/IPokemonInfo";
 import {API_URL} from "../../config";
+import {usePokemonInfo} from "../../hook/usePokemonInfo";
 
 interface IPokemonCardProps {
 	pokemon: IPokemonResponse;
 }
 
 export const PokemonCard = ({pokemon}: IPokemonCardProps) => {
-	const {data} = useQuery([QUERY_KEY.POKEMON, pokemon.url], () => getPokemonInfo(pokemon.url));
-	const pokemonId = pokemon.url.slice(0, -1).split('/').pop();
-
-	const backgroundCard = useMemo(() => {
-		const pokemon = get(data, 'data') as IPokemonInfo;
-
-		if (!pokemon?.types) {
-			return COLOR_POKEMON_TYPE[POKEMON_TYPE.UNKNOWN];
-		}
-		const colors = pokemon.types.map(_item => COLOR_POKEMON_TYPE[_item.type.name]);
-
-		if(colors.length > 1){
-			return mix(colors[0], colors[1]).hex;
-		}
-
-		return colors[0];
-
-	},[data]);
+	const {pokemonId, backgroundCard} = usePokemonInfo(pokemon);
 
 	return (
-		<div className={`w-full h-[250px] rounded-2xl p-4 flex flex-col`} style={{backgroundColor: backgroundCard}}>
+		<div className={`w-full h-[250px] rounded-2xl p-4 flex flex-col`} style={{backgroundColor: backgroundCard}} data-testid={`pokemon-${pokemon.name}`}>
 			<img
 				className={"w-full h-full object-contain max-h-[180px]"}
 				src={`${API_URL.apiImage}${pokemonId}.png`}

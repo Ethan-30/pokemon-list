@@ -22,10 +22,7 @@ export const queryClient = new QueryClient({
 root.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <InjectAxiosInterceptors/>
         <App/>
-      </BrowserRouter>
     </QueryClientProvider>
   </React.StrictMode>
 );

@@ -8,5 +8,5 @@ module.exports = {
         '@testing-library/jest-dom/extend-expect',
         '<rootDir>/src/setupTests.ts'
     ],
-    testEnvironment: 'jsdom',
+    testEnvironment: 'jsdom'
 }

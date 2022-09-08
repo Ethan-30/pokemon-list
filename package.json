@@ -54,5 +54,13 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "reportWebVitals.ts",
+      "index.tsx",
+      "service/index.ts",
+      "entity"
+    ]
+  }
 }
