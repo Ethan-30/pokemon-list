@@ -1,6 +1,5 @@
 import {cleanup, render, screen} from '@testing-library/react';
 import {QueryClient, QueryClientProvider} from 'react-query';
-import {BrowserRouter} from 'react-router-dom';
 import App from '../App';
 
 describe('Test action api', () => {

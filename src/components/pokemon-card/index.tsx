@@ -1,11 +1,5 @@
 import {IPokemonResponse} from "../../entity/IPokemonResponse";
-import {useQuery} from "react-query";
-import {COLOR_POKEMON_TYPE, CONSTANTS, POKEMON_TYPE, QUERY_KEY} from "../../constants";
-import {getPokemonInfo} from "../../service/pokemon";
-import {useMemo} from "react";
-import {get} from 'lodash';
-import mix from 'mix-css-color'
-import {IPokemonInfo} from "../../entity/IPokemonInfo";
+import {CONSTANTS} from "../../constants";
 import {API_URL} from "../../config";
 import {usePokemonInfo} from "../../hook/usePokemonInfo";
 

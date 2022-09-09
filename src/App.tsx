@@ -11,6 +11,7 @@ function App() {
     <QueryClientProvider client={new QueryClient()}>
       <BrowserRouter>
         <InjectAxiosInterceptors/>
+        <PokemonList/>
         <Routes>
           <Route path={'/'} element={<PokemonList/>}/>
           <Route path={'*'} element={<Navigate to="/"/>}/>

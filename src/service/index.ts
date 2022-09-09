@@ -18,6 +18,6 @@ const setupInterceptors = () => {
 	);
 }
 
-export const sendGetRequest = (url: string) => axiosInstance.get(url);
+export const sendGetRequest = (url: string, params?: {limit: number, offset: number}) => axiosInstance.get(url, {params});
 
 export default setupInterceptors;

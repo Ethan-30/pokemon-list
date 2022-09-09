@@ -8,10 +8,14 @@ import mix from "mix-css-color";
 import {IPokemonResponse} from "../entity/IPokemonResponse";
 
 export const usePokemonInfo = (pokemon: IPokemonResponse) => {
-	const {data} = useQuery([QUERY_KEY.POKEMON, pokemon.url], () => getPokemonInfo(pokemon.url));
+	const {data, isLoading} = useQuery([QUERY_KEY.POKEMON, pokemon.url], () => getPokemonInfo(pokemon.url));
 	const pokemonId = pokemon.url.slice(0, -1).split('/').pop();
 
 	const backgroundCard = useMemo(() => {
+		if(isLoading){
+			return COLOR_POKEMON_TYPE[POKEMON_TYPE.UNKNOWN];
+		}
+
 		const pokemon = get(data, 'data') as IPokemonInfo;
 
 		if (!pokemon?.types) {
@@ -25,7 +29,7 @@ export const usePokemonInfo = (pokemon: IPokemonResponse) => {
 
 		return colors[0];
 
-	},[data]);
+	},[data, isLoading]);
 
 	return {pokemonId, backgroundCard}
 }

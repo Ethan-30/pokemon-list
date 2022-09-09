@@ -1,12 +1,10 @@
-import {act, renderHook, waitFor} from "@testing-library/react";
+import {renderHook, waitFor, render} from "@testing-library/react";
 import {QueryClient, QueryClientProvider} from "react-query";
-import {usePokemonInfo} from "../usePokemonInfo";
-import {API_URL} from "../../config";
 import {usePokemonList} from "../usePokemonList";
-import {logger} from "react-query/types/react/logger";
+import * as ReactQuery from 'react-query';
+import {QUERY_KEY} from "../../constants";
 
 describe('usePokemonList', () => {
-	// setUp();
 
 	test('should render correct usePokemonList', async () => {
 		const queryClient = new QueryClient();
@@ -16,8 +14,23 @@ describe('usePokemonList', () => {
 			</QueryClientProvider>
 		);
 
-		const { result } = renderHook(() => usePokemonList(1), { wrapper });
+		const { result } = renderHook(() => usePokemonList(0), { wrapper });
 
 		await waitFor(() => expect(result.current).toBeDefined());
 	});
+});
+
+describe('usePokemonList 2', () => {
+	test('should render correct usePokemonList', async () => {
+		const queryClient = new QueryClient();
+		const wrapper = ({ children }:any) => (
+			<QueryClientProvider client={queryClient}>
+				{children}
+			</QueryClientProvider>
+		);
+
+		const { result } = renderHook(() => usePokemonList(0), { wrapper });
+		await waitFor(() => expect(result.current.totalPokemonList).toEqual(1154));
+	});
+
 });
