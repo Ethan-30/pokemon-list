@@ -22,10 +22,12 @@ describe('Test action api', () => {
 				name: 'bulbasasur',
 				url: `${API_URL.apiList}/1/`,
 			}],
+			isLoading: false,
 		});
 		jest.spyOn(usePokemonInfo, 'usePokemonInfo').mockReturnValue({
 			pokemonId : '1',
-			backgroundCard: 'red'
+			backgroundCard: 'red',
+			isLoading: false,
 		});
 		const { asFragment } = render(
 			<QueryClientProvider client={new QueryClient()}>

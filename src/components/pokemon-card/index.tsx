@@ -8,10 +8,12 @@ interface IPokemonCardProps {
 }
 
 export const PokemonCard = ({pokemon}: IPokemonCardProps) => {
-	const {pokemonId, backgroundCard} = usePokemonInfo(pokemon);
+	const {isLoading, pokemonId, backgroundCard} = usePokemonInfo(pokemon);
 
 	return (
-		<div className={`w-full h-[250px] rounded-2xl p-4 flex flex-col`} style={{backgroundColor: backgroundCard}} data-testid={`pokemon-${pokemon.name}`}>
+		<div
+			className={`w-full h-[250px] rounded-2xl p-4 flex flex-col ${isLoading ? 'animate-pulse bg-slate-700' : ''}`}
+			style={{backgroundColor: backgroundCard}} data-testid={`pokemon-${pokemon.name}`}>
 			<img
 				className={"w-full h-full object-contain max-h-[180px]"}
 				src={`${API_URL.apiImage}${pokemonId}.png`}

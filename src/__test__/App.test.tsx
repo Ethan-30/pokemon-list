@@ -8,7 +8,7 @@ describe('Test action api', () => {
 		jest.resetAllMocks();
 	});
 
-	test('Able to render created pokeList', () => {
+	test('Able to render created pokemon list', () => {
 		setUp();
 		expect(screen.queryByTestId('pokemon-test')).not.toBeNull();
 	});
